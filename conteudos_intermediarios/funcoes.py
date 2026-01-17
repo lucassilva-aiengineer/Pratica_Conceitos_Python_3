@@ -123,8 +123,9 @@ cargos = ["Desenvolvedor(a) Full Stack",
 "Engenheiro(a) de Confiabilidade (SRE)"]
 
 
+from typing import List
 
-def gerar_candidatos(candidatos_gerar_a= 0):
+def gerar_candidatos(candidatos_gerar_a: int= 0) -> List[Candidato]:
 
     faker = Faker('pt_BR')
 
@@ -164,24 +165,29 @@ def gerar_candidatos(candidatos_gerar_a= 0):
 
 candidatos = gerar_candidatos()
 
+from typing import Dict
 
 # Criando uma função que avalia os candidatos e ver se eles são aptos a exercer uma função especíca 
 
-def gerar_oportunidades():
+def gerar_oportunidades()-> dict:
 
-    oportunidades_abertas = defaultdict(dict)
+    oportunidades_abertas: Dict[str, dict]= defaultdict(dict)
 
     # for id_, cargo in enumerate(cargos): 
 
     for cargo in cargos: 
 
-        id_gerado_lista = random.randint(0, 9)
-
-        salario_a = random.uniform(1900, 10000)
+        # id_gerado_lista = random.randint(0, 9)
 
         id_gerado_funcao = gerar_id()
+
+        cargo = random.choice(cargos)
+        cidade = random.choice(cidades)
+        salario_a = random.uniform(1900, 10000)
+
+
         oportunidades_abertas[id_gerado_funcao]["cargo"] = cargo 
-        oportunidades_abertas[id_gerado_funcao]["cidade"] = cidades[id_gerado_lista] 
+        oportunidades_abertas[id_gerado_funcao]["cidade"] = cidade
         oportunidades_abertas[id_gerado_funcao]["salario"] = salario_a 
 
     return oportunidades_abertas
@@ -191,3 +197,5 @@ def gerar_oportunidades():
 oportunidades_geradas = gerar_oportunidades()
 
 print(oportunidades_geradas)
+
+# print(type(defaultdict()))
